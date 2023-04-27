@@ -22,7 +22,8 @@ const UsuarioSchema = mongoose.Schema({
         trim: true
     },
     token:{
-        type: String
+        type: String,
+        
     },
     confirmado:{
         type: Boolean, 
