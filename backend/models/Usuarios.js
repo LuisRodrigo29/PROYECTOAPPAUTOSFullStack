@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
 const UsuarioSchema = mongoose.Schema({
+    //Objeto con la estructura de este modelo 
     nombre:{
         type: String,
-        require: true, // para tener validación en el servidor
+        required: true, // para tener validación en el servidor
         trim: true // para eliminar espacios
     },
     password:{
@@ -12,7 +13,7 @@ const UsuarioSchema = mongoose.Schema({
     },
     email:{
         type: String,
-        require: true,
+        required: true,
         unique: true, // para garantizar que se utiliza un email por cuenta 
         trim: true
     },
@@ -29,4 +30,7 @@ const UsuarioSchema = mongoose.Schema({
         type: Boolean, 
         default: false // cambia una vez que el usuario visite la cuenta y confirmen el token 
     }
-})
+});
+
+//Registro de modelo en mongoose 
+const Usuarios = mongoose.model()
