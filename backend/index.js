@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from 'dotenv';
 import conectarDB from "./config/db.js"; // cuando es un archivo que yo cre si requiero la extensión .js
+import usuariosRoutes from "./routes/UsuariosRoutes.js"
 
 //Crear servidor de express 
 const app = express(); // se manda a llamar la funcion de express
@@ -8,9 +9,7 @@ dotenv.config();
 
 conectarDB();
 
-app.use('/', (req, res) =>{
-    res.send("Hola mundo ")
-})
+app.use('/api/usuarios', usuariosRoutes );
 
 const PORT = process.env.PORT || 4000
 

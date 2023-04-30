@@ -33,4 +33,5 @@ const UsuarioSchema = mongoose.Schema({
 });
 
 //Registro de modelo en mongoose 
-const Usuarios = mongoose.model()
+const Usuarios = mongoose.model("Usuarios", UsuarioSchema);
+export default Usuarios;
