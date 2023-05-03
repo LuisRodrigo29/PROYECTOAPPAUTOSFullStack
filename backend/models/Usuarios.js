@@ -39,13 +39,24 @@ UsuarioSchema.pre('save', async function (next) {
 
     //Valida si un password ya esta hasheado para que no lo vuelva a hashear para que el usuario se pueda autenticar luego 
     if(!this.isModified('password')){
-       next() 
+     next();
+    
     }
 
     //Si un password ya esta hasheado lo almacena en la base de datos 
     const salt = await bcrypt.genSalt(10)
     this.password =  await bcrypt.hash(this.password, salt)// reescribe la propiedad del objeto 
-} )
+} );
+
+//comprobar el password 
+UsuarioSchema.methods.comprobarPassword = async function(password){ // El primero es el password que pasan en el formulario
+    try {
+        const resultado = await bcrypt.compare(password, this.password); // this.password es el del hasheo
+        return resultado;
+    } catch (error) {
+        console.log(error)
+    }
+};
 
 //Registro de modelo en mongoose 
 const Usuarios = mongoose.model("Usuarios", UsuarioSchema);
