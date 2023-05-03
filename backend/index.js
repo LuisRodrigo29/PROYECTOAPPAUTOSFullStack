@@ -5,6 +5,8 @@ import usuariosRoutes from "./routes/UsuariosRoutes.js"
 
 //Crear servidor de express 
 const app = express(); // se manda a llamar la funcion de express
+app.use(express.json()); //lea datos enviados a la app desde postman
+
 dotenv.config();
 
 conectarDB();
