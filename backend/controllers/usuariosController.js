@@ -1,5 +1,5 @@
 import Usuarios from "../models/Usuarios.js";
-
+import generarJWT from "../helpers/generarJWT.js";
 
 
 //ordenar el routing 
@@ -76,10 +76,13 @@ if(!usuario.confirmado){
 }
 
 //Revisa que el password sea el correcto 
-
 const passwordCorrecto = await usuario.comprobarPassword(password);
 if(passwordCorrecto){
-  console.log("contraseña correcta")
+  
+
+ //Autenticar 
+ res.json({token: generarJWT(usuario.id)});
+ 
 } else{
   const error = new Error('Contraseña incorrecta ')
   return res.status(403).json({msg: error.message})
