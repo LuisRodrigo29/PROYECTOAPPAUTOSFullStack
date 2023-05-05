@@ -7,8 +7,8 @@ const conectarDB = async () =>{
         {
             useNewUrlParser: true, // configuraciones que requiere mongoose
             useUnifiedTopology: true,
-        }); // conectando a la BD 
-        
+        }); 
+        // conectando a la BD 
         const url = `${db.connection.host}:${db.connection.port}` // se realiza la conexion al host que da la url y al puerto donde se esta conectando
         console.log(`BDAUTOS conectado en: ${url}`);
     } catch (error) {
