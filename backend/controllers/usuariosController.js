@@ -1,5 +1,6 @@
 import Usuarios from "../models/Usuarios.js";
 import generarJWT from "../helpers/generarJWT.js";
+import generarId from "../helpers/generarId.js";
 
 
 //ordenar el routing 
@@ -28,7 +29,10 @@ const registrar = async (req, res) => {
 };
 
 const perfil = (req, res) =>{
-    res.json({msg: "Mostrando Perfil"});
+    //acceder a la informacion del usuario autenticado 
+    const {usuario} = req; // lo que esta almacenado en el servidor 
+
+    res.json({perfil: usuario}); // se retorna la información 
 };
 
 const confirmar = async (req, res) => {
@@ -89,5 +93,62 @@ if(passwordCorrecto){
 }
 };
 
-export {registrar, perfil, confirmar, autenticar} //se abren llaves porque va a ser un objeto  donde se pueden exportar multiples funciones
+
+const olvidePassword = async (req, res) => {
+  const {email} = req.body; 
+  // console.log(email) // probando el endpoint
+
+  const existeUsuario = await Usuarios.findOne({email});
+  if(!existeUsuario){
+    const error = new Error("El usuario no existe");
+    return res.status(400).json({ msg: error.message});
+  }
+ 
+  try {
+    existeUsuario.token =  generarId();
+    await existeUsuario.save(); // se guarda en la base de datos 
+    res.json({ msg: "Se ha enviado un email con las instrucciones"});
+  } catch (error) {
+    console.log(error)
+  }
+
+};
+
+const comprobarToken = async(req, res) => {
+  const {token} = req.params // informacion de la URL 
+
+  const tokenValido = await Usuarios.findOne({token});
+ 
+  if(tokenValido){
+    // token valido el usurio existe
+    res.json({msg:'Token válido y el usuario existe'});
+  }else{
+    const error = new Error('Token no válido')
+    return res.status(400).json({ms: error.message})
+  }
+};
+
+const nuevoPassword =  async (req, res) => {
+
+  const {token} = req.params;
+  const {password} = req.body;
+
+  const usuario = await Usuarios.findOne({ token })
+  if(!usuario){
+    const error = new Error('Hubo un error');
+    return res.status(400).json({msg: error.message});
+  }
+
+  try {
+    usuario.token = null;
+    usuario.password = password;
+    await usuario.save();
+    res.json({msg: "Contraseña modificada correctamente"});
+  } catch (error) {
+    console.log(error)
+  }
+
+};
+
+export {registrar, perfil, confirmar, autenticar, olvidePassword, comprobarToken, nuevoPassword } //se abren llaves porque va a ser un objeto  donde se pueden exportar multiples funciones
  
