@@ -3,7 +3,7 @@ const router = express.Router();
 import { agregarCliente, obtenerClientes, obtenerCliente, actualizarCliente, eliminarCliente} from '../controllers/clientesController.js';
 import checkAuth from '../middleware/authMiddleware.js';
 
-//aqui se define el cuerpo de los diferentes rutas (endpoint)
+//aqui se define el cuerpo de las diferentes rutas (endpoint)
 router.route('/')
     .post(checkAuth, agregarCliente) //Registro los pacientes 
     .get(checkAuth, obtenerClientes) //lista los clientes 
