@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from 'dotenv';
+import cors from 'cors'; //protege la api para que alguien externo no pueda acceder a la api 
 import conectarDB from "./config/db.js"; // cuando es un archivo que yo cre si requiero la extensión .js
 import usuariosRoutes from "./routes/UsuariosRoutes.js";
 import clientesRoutes from "./routes/clientesRoutes.js";
@@ -12,6 +13,21 @@ app.use(express.json()); //lea datos enviados a la app desde postman
 dotenv.config();
 
 conectarDB();
+
+const dominiosPermitidos = ["http://localhost:3000"]
+
+const corsOptions = {
+    origin: function(origin, callback){
+        if(dominiosPermitidos.indexOf(origin) !== -1){
+            //El Origen del Request esta permitido 
+            callback(null, true )
+        } else{
+            callback(new Error('No permito por CORS'))
+        }
+    }
+};
+
+app.use(cors({origin: '*'}));
 
 //Creación y registro de routing
 app.use('/api/usuarios', usuariosRoutes );
