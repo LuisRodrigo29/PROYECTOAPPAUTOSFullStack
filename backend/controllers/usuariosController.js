@@ -2,6 +2,7 @@ import Usuarios from "../models/Usuarios.js";
 import generarJWT from "../helpers/generarJWT.js";
 import generarId from "../helpers/generarId.js";
 import emailRegistro from "../helpers/emailRegistro.js";
+import emailOlvidePassword from "../helpers/emailOlvidePassword.js";
 
 
 //ordenar el routing 
@@ -117,6 +118,14 @@ const olvidePassword = async (req, res) => {
   try {
     existeUsuario.token =  generarId();
     await existeUsuario.save(); // se guarda en la base de datos 
+
+    //Enviar Email con instrucciones 
+    emailOlvidePassword({
+      email,
+      nombre: existeUsuario.nombre,
+      token: existeUsuario.token,
+    })
+
     res.json({ msg: "Se ha enviado un email con las instrucciones"});
   } catch (error) {
     console.log(error)

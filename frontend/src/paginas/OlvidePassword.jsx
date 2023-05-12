@@ -1,6 +1,37 @@
+import {useState} from 'react'
 import{Link} from 'react-router-dom'
+import Alerta from '../components/Alerta'
+import clienteAxios from '../config/axios'
 
 const OlvidePassword = () => {
+// definiendo el state
+const [email, setEmail] = useState('')
+const[alerta, setAlerta] = useState({})
+
+const handleSubmit = async (e) =>{ // hace el llamado a la api 
+  e.preventDefault()
+
+  if(email === '' || email.length < 6){
+
+    setAlerta({msg: 'El Correo es obligatorio', error: true})
+    return
+  }
+
+  try {
+    const {data} = await clienteAxios.post('/usuarios/olvide-password', {email})
+
+    setAlerta({msg: data.msg})
+    
+  } catch (error) {
+     setAlerta({
+      msg: error.response.data.msg,
+      error: true 
+     })
+  }
+}
+
+const {msg} = alerta
+
   return (
     <>
      <div>
@@ -13,7 +44,11 @@ const OlvidePassword = () => {
         <div className='mt-18 md:mt-5 px-5 py-2'  >
            <img  className="mx-auto h-12 w-auto mt-5" src="src/img/logo.png" alt="logo" />
            
-           <form className="shadow-2xl p-4 border rounded-xl bg-white ">
+           <form className="shadow-2xl p-4 border rounded-xl bg-white " 
+           onSubmit={handleSubmit}>
+           {  msg &&  < Alerta
+              alerta={alerta}
+            />} 
 
            <div class="mb-4">
                 <label className="  mt-8 text-center block text-gray-800 text-xl font-bold" >Ingresa tu correo electrónico</label>
@@ -23,7 +58,11 @@ const OlvidePassword = () => {
                 id="email"
                 name="email"
                 type="email" 
-                placeholder="Correo Empresa"/>
+                placeholder="Correo Empresa"
+                value={email}
+                onChange={ e => setEmail(e.target.value)} //lee los datos ingresados por el formulario
+                />
+                
              
               </div>
 
