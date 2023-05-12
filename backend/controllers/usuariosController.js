@@ -1,12 +1,13 @@
 import Usuarios from "../models/Usuarios.js";
 import generarJWT from "../helpers/generarJWT.js";
 import generarId from "../helpers/generarId.js";
+import emailRegistro from "../helpers/emailRegistro.js";
 
 
 //ordenar el routing 
 const registrar = async (req, res) => {
     //req.body tiene la informacion 
-    const { email} = req.body //Extraigo informacion, body para leer informacion de formularios
+    const { email, nombre} = req.body //Extraigo informacion, body para leer informacion de formularios
 
     //Prevenir usuarios duplicados
     const existeUsuario = await Usuarios.findOne({email: email})
@@ -18,7 +19,14 @@ const registrar = async (req, res) => {
     try {
         //Guardar un Nuevo Usuario
         const usuario = new Usuarios(req.body); //instancia
-        const usuarioGuardado = await usuario.save()
+        const usuarioGuardado = await usuario.save() // se almacena en la BD
+
+        // Enviar el email 
+        emailRegistro({
+          email,
+          nombre,
+          token:usuarioGuardado.token 
+        })
 
         res.json(usuarioGuardado);
     } catch (error) {
@@ -53,8 +61,10 @@ const confirmar = async (req, res) => {
     //se modifica y almacena 
     usuarioConfirmar.token = null;
     usuarioConfirmar.confirmado = true; 
-    await usuarioConfirmar.save()
+    await usuarioConfirmar.save();
+
     res.json({msg:"Usuario confirmado "});
+    
   } catch (error) {
     console.log(error);
   }    

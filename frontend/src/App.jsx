@@ -11,6 +11,8 @@ import ConfirmarCuenta from './paginas/ConfirmarCuenta'
 function App() {
 
 
+
+
   return (
     <BrowserRouter>
       <Routes >
