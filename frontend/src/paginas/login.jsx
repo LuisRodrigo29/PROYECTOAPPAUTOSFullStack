@@ -1,6 +1,47 @@
+import{useState} from 'react'
 import{Link} from 'react-router-dom'
+import Alerta from '../components/Alerta'
+import useAuth from '../hooks/useAuth'
+import clienteAxios from '../config/axios'
+
+
 
 const login = () => {
+
+  const[email, setEmail] = useState('')
+  const[password, setPassword] = useState('')
+  const[alerta, setAlerta]= useState({})
+
+  const handleSubmit = async (e) =>{
+        e.preventDefault();
+        console.log('iniciando sesion ')
+        
+        if([email, password].includes('')){
+          setAlerta({
+            msg: 'Todos los campos son obligatorios ',
+            error: true 
+          });
+
+          return
+        }
+        
+       try {
+           
+          const {data} = await clienteAxios.post('/usuarios/login',{email, password})
+          console.log( data)
+
+
+       } catch (error) {
+        setAlerta({
+          msg: error.response.data.msg,
+          error: true
+        })
+       }
+
+  }
+
+  const{ msg} = alerta
+
   return (
     <>
  
@@ -12,8 +53,14 @@ const login = () => {
           
         <div className='mt-18 md:mt-5 px-5 py-2'  >
            <img  className="mx-auto h-12 w-auto mt-5" src="src/img/logo.png" alt="logo" />
-           
-           <form className="shadow-2xl p-4 border rounded-xl bg-white ">
+
+          
+           <form className="shadow-2xl p-4 border rounded-xl bg-white " 
+           onSubmit={handleSubmit}>
+           {msg && <Alerta
+                alerta={alerta}
+           />}
+
 
            <div class="mb-4">
                 <label className=" uppercase mt-8 text-center block text-gray-800 text-xl font-bold" >correo empresa</label>
@@ -22,7 +69,11 @@ const login = () => {
                 id="email"
                 name="email"
                 type="email" 
-                placeholder="Correo Empresa"/>
+                placeholder="Correo Empresa"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                
+                />
              
               </div>
               
@@ -33,7 +84,11 @@ const login = () => {
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Contraseña"/>
+                placeholder="Contraseña"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                
+                />
               </div>
 
             <div className='flex justify-center items-center'> 

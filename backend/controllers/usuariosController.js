@@ -76,17 +76,17 @@ const autenticar  = async (req, res, next) => {
   const {email, password} = req.body;
 
 // Coborra si el usuario existe 
-const usuario = await Usuarios.findOne({email:email})
+const usuario = await Usuarios.findOne({email});
 
 if (!usuario) {
-  res.status(401).json({ mensaje: "El usuario no existe" });
+  res.status(404).json({ msg: "El usuario no existe" });
   return next();
 }
 
 //Comprueba si el usuario esta confirmado 
 
 if(!usuario.confirmado){
-  res.status(403).json({ mensaje: "Tu cuenta no ha sido confirmada" })
+  res.status(403).json({ msg: "Tu cuenta no ha sido confirmada" })
   return next();
 }
 
