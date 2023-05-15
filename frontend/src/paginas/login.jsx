@@ -1,5 +1,5 @@
 import{useState} from 'react'
-import{Link} from 'react-router-dom'
+import{Link, useNavigate} from 'react-router-dom'
 import Alerta from '../components/Alerta'
 import useAuth from '../hooks/useAuth'
 import clienteAxios from '../config/axios'
@@ -12,9 +12,11 @@ const login = () => {
   const[password, setPassword] = useState('')
   const[alerta, setAlerta]= useState({})
 
+  const navigate = useNavigate()
+
   const handleSubmit = async (e) =>{
         e.preventDefault();
-        console.log('iniciando sesion ')
+
         
         if([email, password].includes('')){
           setAlerta({
@@ -28,8 +30,9 @@ const login = () => {
        try {
            
           const {data} = await clienteAxios.post('/usuarios/login',{email, password})
-          console.log( data)
-
+          
+          localStorage.setItem('token', data.token)
+          navigate('/admin')
 
        } catch (error) {
         setAlerta({

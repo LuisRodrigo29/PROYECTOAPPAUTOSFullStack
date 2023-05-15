@@ -13,7 +13,7 @@ try {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET) // toma diferentes parametros, como el token que obtengo cuando autentifico al usuario
 
-   req.usuario = await Usuarios.findById(decoded.id).select("-password -token -confirmado");
+   req.usuario = await Usuarios.findById(decoded.id).select("-password -token -confirmado"); // se validan y comprueban los datos  en el servidor
 
  return next() //permite que se valla al siguente middleware y no siga bajando en las lineas del codigo
 } catch (error) {

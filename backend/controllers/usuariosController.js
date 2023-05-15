@@ -11,7 +11,7 @@ const registrar = async (req, res) => {
     const { email, nombre} = req.body //Extraigo informacion, body para leer informacion de formularios
 
     //Prevenir usuarios duplicados
-    const existeUsuario = await Usuarios.findOne({email: email})
+    const existeUsuario = await Usuarios.findOne({email})
     if(existeUsuario){
         const error = new Error("El usuario ya ha sido registrado");// se crea una instancia 
         return res.status(400).json({msg: error.message}) // se genera un error para que el codigo detenga la ejecución 
