@@ -7,14 +7,19 @@ const AuthContext = createContext()
 
 const AuthProvider = ({children}) =>{ // en el children estan todos los componentes que estan dentro del authprovider del archivo App.jsx
 // se define el State que va a estar disponible de forma global 
-
+const[cargando, setCargando] = useState(true)
 const [ auth, setAuth] = useState({})
 
 useEffect(() =>{
 
         const autenticarUsuario = async () =>{
             const token = localStorage.getItem('token')
-           if(!token) return
+           if(!token){
+
+            setCargando(false)
+            return
+
+           }
 
           const config = {
                 headers:{
@@ -30,17 +35,27 @@ useEffect(() =>{
             console.log(error.response.data.msg)
             setAuth({})
           }
+
+          setCargando(false)
         }
 
         autenticarUsuario()
 }, [])
 
+const cerrarSesion = ( ) =>{
+    localStorage.removeItem('token')
+    setAuth({})
+}
+
 return(
-    // este retorna el provider
+    // este retorna el provider y se hace disponible a otros componentes
     <AuthContext.Provider
         value={{
             auth,
-            setAuth
+            setAuth,
+            cargando,
+
+            cerrarSesion
         }}
     >
         {children} 

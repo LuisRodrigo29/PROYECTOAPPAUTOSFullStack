@@ -3,13 +3,20 @@
  //Route para una ruta en especifico 
  //Aqui es donde enruto las paginas creadas
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+
+//LAYOUT
 import AuthLayout from './layout/AuthLayout'
+import RutaProtegida from './layout/RutaProtegida'
+
+//PAGINAS
 import Login from './paginas/login'
 import Registrar from './paginas/Registrar'
 import OlvidePassword from './paginas/OlvidePassword'
 import ConfirmarCuenta from './paginas/ConfirmarCuenta'
 import NuevoPassword from './paginas/NuevoPassword'
+import AdministrarAlquilerV from './paginas/AdministrarAlquilerV'
 
+//CONTEXT
 import { AuthProvider } from './context/AuthProvider'
 
 function App() {
@@ -29,6 +36,11 @@ function App() {
                  <Route path="confirmar/:id" element={<ConfirmarCuenta/>} />
                 
         </Route>
+
+          <Route path='/admin' element={<RutaProtegida />}>
+            <Route index element={<AdministrarAlquilerV />} />
+
+          </Route>
       </Routes>
       </AuthProvider>
     </BrowserRouter>

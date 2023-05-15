@@ -96,7 +96,13 @@ if(passwordCorrecto){
   
 
  //Autenticar 
- res.json({token: generarJWT(usuario.id)});
+ res.json({
+  _id: usuario._id,
+  nombre: usuario.nombre,
+  email:usuario.email,
+  token:generarJWT(usuario.id),
+
+ });
  
 } else{
   const error = new Error('Contraseña incorrecta ')
