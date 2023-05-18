@@ -29,8 +29,6 @@ const Vehiculo = ({ vehiculo }) => {
       <tr className="border-b border-gray-300" > 
         <td >{vehiculo.marca}</td>
         <td>{vehiculo.placa}</td>
-        {/* <td>{vehiculo.year} </td> */}
-        {/* <td>{new Date(vehiculo.year).toLocaleDateString('es-CO')}</td> */}
         <td>{formatearFecha(vehiculo.year)}</td>
         <td>{vehiculo.color}</td>
         <td>{vehiculo.puestos}</td>

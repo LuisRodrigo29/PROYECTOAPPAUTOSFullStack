@@ -16,7 +16,7 @@ const Header = () => {
         </h1>
         
         <nav className='flex flex-col items-center lg:flex-row gap-4 mt-5 lg:mt-0'  >
-              <Link to="/perfil"  className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold" >   Perfil </Link>
+             
               <Link to="/admin" className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold" > Vehículos</Link>
               <Link to="/admin" className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold" > Clientes</Link>
 
