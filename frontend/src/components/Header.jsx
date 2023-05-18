@@ -12,13 +12,12 @@ const Header = () => {
         <div  >  <img src="../src/img/logo.png" alt="logo" className=' h-14' /></div>
 
 
-        <h1 className="   flex items-center text-center font-bold text-2xl  ">Gestor Renta de Vehículos 
+        <h1 className="   flex items-center text-center font-bold text-2xl  ">Administrador de Vehículos 
         </h1>
         
         <nav className='flex flex-col items-center lg:flex-row gap-4 mt-5 lg:mt-0'  >
-              <Link to="/admin"  className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold" >   Perfil </Link>
-              <Link to="/vehiculos" className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold" > Vehículos</Link>
-              <Link to="/admin" className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold" > Nuevo vehículo</Link>
+              <Link to="/perfil"  className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold" >   Perfil </Link>
+              <Link to="/admin" className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold" > Vehículos</Link>
               <Link to="/admin" className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold" > Clientes</Link>
 
           <button type="button"  className="text-white  hover:text-[#F2B62E] text-sm mr-4 uppercase font-bold"

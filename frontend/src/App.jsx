@@ -4,6 +4,7 @@
  //Aqui es donde enruto las paginas creadas
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
+
 //LAYOUT
 import AuthLayout from './layout/AuthLayout'
 import RutaProtegida from './layout/RutaProtegida'
@@ -18,6 +19,7 @@ import AdministrarAlquilerV from './paginas/AdministrarAlquilerV'
 
 //CONTEXT
 import { AuthProvider } from './context/AuthProvider'
+import { VehiculosProvider } from './context/VehiculosProvider'
 
 function App() {
 
@@ -27,6 +29,7 @@ function App() {
   return (
     <BrowserRouter>
     <AuthProvider> 
+      <VehiculosProvider>
       <Routes >
         <Route path='/' element={<AuthLayout/>}>  
                  <Route index element={<Login/>} />
@@ -39,9 +42,11 @@ function App() {
 
           <Route path='/admin' element={<RutaProtegida />}>
             <Route index element={<AdministrarAlquilerV />} />
+         
 
           </Route>
       </Routes>
+      </VehiculosProvider>
       </AuthProvider>
     </BrowserRouter>
   )

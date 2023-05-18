@@ -1,5 +1,5 @@
-import express from "express";
-import dotenv from 'dotenv';
+import express from "express"; //  servidor 
+import dotenv from 'dotenv'; //variables de entorno 
 import cors from 'cors'; //protege la api para que alguien externo no pueda acceder a la api 
 import conectarDB from "./config/db.js"; // cuando es un archivo que yo cre si requiero la extensión .js
 import usuariosRoutes from "./routes/UsuariosRoutes.js";

@@ -8,8 +8,8 @@ import checkAuth from "../middleware/authMiddleware.js";
 router.post('/', registrar );
 router.get("/confirmar/:token", confirmar);
 router.post('/login', autenticar);
-router.post('/olvide-password', olvidePassword); //vaida email del usuario
-router.route("/olvide-password/:token").get(comprobarToken).post(nuevoPassword); //get lee el token y post almacena la nueva contraseña 
+router.post('/olvide-password', olvidePassword); //valida email del usuario
+router.route("/olvide-password/:token").get(comprobarToken).post(nuevoPassword); //get lee el token y post almacena la nueva contraseña
 
 
 // área privada

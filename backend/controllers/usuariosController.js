@@ -41,7 +41,7 @@ const perfil = (req, res) =>{
     //acceder a la informacion del usuario autenticado 
     const {usuario} = req; // lo que esta almacenado en el servidor 
 
-    res.json({perfil: usuario}); // se retorna la información 
+    res.json( usuario); // se retorna la información 
 };
 
 const confirmar = async (req, res) => {

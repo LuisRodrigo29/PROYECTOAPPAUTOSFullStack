@@ -15,11 +15,11 @@ const agregarVehiculo = async (req, res) => {
 };
 const obtenerVehiculos = async (req, res) => {
     // se filtran los vehiculos que hayan manipulado un usuario que ha iniciado sesión
-    const vehiculoss = await Vehiculos.find()
+    const vehiculos = await Vehiculos.find()
     .where("usuario")
     .equals(req.usuario);
 
-    res.json(vehiculoss);   
+    res.status(200).json(vehiculos);   
 };
 
 
