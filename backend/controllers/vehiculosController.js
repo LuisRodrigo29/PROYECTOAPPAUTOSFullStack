@@ -85,7 +85,7 @@ const eliminarVehiculo= async (req, res) => {
     }
 
     try {
-        await cliente.deleteOne();
+        await vehiculo.deleteOne();
         res.json({msg: "Vehiculo Eliminado"})
     } catch (error) {
         console.log(error)

@@ -82,32 +82,37 @@ export const VehiculosProvider = ({ children }) => {
   }
 
 
-//   //Elimar informacion de la tabla de vehiculos 
-//   const eliminarVehiculo = async id =>{
+  //Elimar informacion de la tabla de vehiculos 
+  const eliminarVehiculo = async  id =>{
+    console.log(id)
 
-//   const confirmar = confirm('¿Desea eliminar el registro?') 
+  const confirmar = confirm('¿Desea eliminar el registro?') 
+  console.log(confirmar)
 
-//  if(confirmar){
-//   try {
-//     const token = localStorage.getItem('token');
-//     const config = {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`
-//       }}
+ if(confirmar){
+  try {
+    const token = localStorage.getItem('token');
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }}
 
-//       const {data} = await clienteAxios.delete(`/vehiculos/${id}`, config)
-//       console.log(data)
-//   } catch (error) {
-//     console.log(error)
-//   }
+      const {data} = await clienteAxios.delete(`/vehiculos/${id}`, config)
+      //sincronizar tabla, osea que cuando elimine un vehiculo se elimine tambien de la tabla 
+      const vehiculosActualizado = vehiculos.filter( pacientesState => pacientesState._id !== id)
+      setVehiculos(vehiculosActualizado)
 
-//  }
-//   }
+  } catch (error) {
+    console.log(error)
+  }
+
+ }
+  }
 
 
   return (
-    <VehiculosContext.Provider value={{ vehiculos, guardarVehiculo, setEdicion, vehiculo,  }}>
+    <VehiculosContext.Provider value={{ vehiculos, guardarVehiculo, setEdicion, vehiculo, eliminarVehiculo  }}>
       {children}
     </VehiculosContext.Provider>
   );

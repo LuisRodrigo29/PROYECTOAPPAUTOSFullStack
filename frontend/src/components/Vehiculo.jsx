@@ -6,7 +6,7 @@ import useVehiculos from '../hooks/useVehiculos'
 const Vehiculo = ({ vehiculo }) => {
 
 
-  const {setEdicion} = useVehiculos()
+  const {setEdicion, eliminarVehiculo } = useVehiculos()
 
   const{_id} = vehiculo  //extrae la informacion del id 
     const formatearFecha = (fecha) => {
@@ -36,7 +36,9 @@ const Vehiculo = ({ vehiculo }) => {
         <td>{vehiculo.puestos}</td>
         <td>{vehiculo.estado}</td>
         <td>{vehiculo.precio}</td>
-        <td><div><button className='text-green-600' type='button ' onClick={()=> setEdicion(vehiculo)}>Editar</button> </div> <div><button className='text-red-700' >Eliminar</button></div></td>
+        <td ><div><button className='text-green-600' type='button ' onClick={()=> setEdicion(vehiculo)}>Editar</button> </div> <div><button className='text-red-700' 
+        onClick={() => eliminarVehiculo(_id) }>
+          Eliminar</button></div></td>
       </tr>
      
     );
