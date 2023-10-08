@@ -34,7 +34,7 @@ app.use('/api/usuarios', usuariosRoutes );
 app.use('/api/clientes', clientesRoutes );
 app.use('/api/vehiculos', vehiculosRoutes );
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
     console.log(`Servidor funcionando en el puerto ${PORT}` )

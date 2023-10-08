@@ -70,7 +70,7 @@ const Registrar = () => {
         </div>
 
         <div className='mt-18 md:mt-5 px-5 py-2'  >
-           <img  className="mx-auto h-12 w-auto mt-5" src="src/img/logo.png" alt="logo" />
+           <img  className="mx-auto h-12 w-auto mt-5" src="/img/logo.png" alt="logo" />
 
             
            

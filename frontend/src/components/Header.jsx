@@ -9,7 +9,7 @@ const Header = () => {
      
     <div className=" container mx-auto flex flex-col lg:flex-row justify-between items-center">
     
-        <div  >  <img src="../src/img/logo.png" alt="logo" className=' h-14' /></div>
+        <div  >  <img src="/img/logo.png" alt="logo" className=' h-14' /></div>
 
 
         <h1 className="   flex items-center text-center font-bold text-2xl  ">Administrador de Vehículos 
